@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #f0fdf4;
-  --color-brand-100: #dcfce7;
-  --color-brand-200: #bbf7d0;
-  --color-brand-300: #86efac;
-  --color-brand-400: #4ade80;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-800: #166534;
-  --color-brand-900: #14532d;
-  --color-brand-950: #052e16;
+  --color-brand-50: #ebf9f1;
+  --color-brand-100: #d0f1de;
+  --color-brand-200: #a4e3c1;
+  --color-brand-300: #6cd19f;
+  --color-brand-400: #3ab87e;
+  --color-brand-500: #2ecc71; /* Primary accent */
+  --color-brand-600: #1e9d5a;
+  --color-brand-700: #187d49;
+  --color-brand-800: #1a6b3a; /* Hero gradient stop */
+  --color-brand-900: #0f4a2a; /* Hero gradient stop */
+  --color-brand-950: #0a2e1a; /* Darkest hero bg */
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
