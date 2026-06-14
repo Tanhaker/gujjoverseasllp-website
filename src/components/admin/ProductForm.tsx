@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { Plus, Trash2, UploadCloud, Save, Loader2, X } from 'lucide-react'
@@ -12,23 +12,38 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
+  const [categories, setCategories] = useState<{id: string, name: string}[]>([])
 
   // Form State
   const [name, setName] = useState(initialData?.name || '')
   const [slug, setSlug] = useState(initialData?.slug || '')
-  const [category, setCategory] = useState(initialData?.category || '')
+  const [categoryId, setCategoryId] = useState(initialData?.category_id || '')
   const [origin, setOrigin] = useState(initialData?.origin || '')
   const [shortDesc, setShortDesc] = useState(initialData?.short_description || '')
   const [desc, setDesc] = useState(initialData?.description || '')
-  const [visible, setVisible] = useState(initialData?.visible ?? true)
+  const [visible, setVisible] = useState(initialData?.is_visible ?? true)
+  const [featured, setFeatured] = useState(initialData?.is_featured ?? false)
+  const [newArrival, setNewArrival] = useState(initialData?.is_new_arrival ?? false)
   const [images, setImages] = useState<string[]>(initialData?.images || [])
   
   // Specs State - convert object to array of key/value pairs
   const [specs, setSpecs] = useState<{key: string, value: string}[]>(
-    initialData?.specs 
+    initialData?.specs && Object.keys(initialData.specs).length > 0
       ? Object.entries(initialData.specs).map(([k, v]) => ({ key: k, value: v as string }))
       : [{ key: '', value: '' }]
   )
+
+  useEffect(() => {
+    // Fetch categories for the dropdown
+    supabase.from('categories').select('id, name').order('display_order').then(({ data }) => {
+      if (data) {
+        setCategories(data)
+        if (!initialData?.category_id && data.length > 0) {
+          setCategoryId(data[0].id)
+        }
+      }
+    })
+  }, [supabase, initialData])
 
   const handleSlugify = (text: string) => {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
@@ -107,11 +122,13 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
     const payload = {
       name,
       slug,
-      category,
+      category_id: categoryId,
       origin,
       short_description: shortDesc,
       description: desc,
-      visible,
+      is_visible: visible,
+      is_featured: featured,
+      is_new_arrival: newArrival,
       images,
       specs: specsObj,
       updated_at: new Date().toISOString()
@@ -164,7 +181,10 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Category</label>
-          <input required type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-2 focus:ring-brand-500 outline-none" placeholder="e.g. Grains, Spices, Pulses" />
+          <select required value={categoryId} onChange={(e) => setCategoryId(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-2 focus:ring-brand-500 outline-none">
+            {categories.length === 0 && <option value="">Loading categories...</option>}
+            {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Origin</label>
@@ -185,7 +205,7 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
       {/* Specifications Section */}
       <div className="border-t border-slate-200 dark:border-slate-800 pt-6">
         <div className="flex justify-between items-center mb-4">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Specifications</label>
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Specifications (JSON Key-Value Pairs)</label>
           <button type="button" onClick={handleAddSpec} className="text-sm text-brand-600 dark:text-brand-400 font-medium hover:text-brand-700 flex items-center gap-1">
             <Plus className="h-4 w-4" /> Add Row
           </button>
@@ -234,16 +254,40 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
         </div>
       </div>
 
-      {/* Visibility Toggle */}
-      <div className="border-t border-slate-200 dark:border-slate-800 pt-6 flex items-center justify-between">
-        <div>
-          <h4 className="text-sm font-medium text-slate-900 dark:text-white">Public Visibility</h4>
-          <p className="text-sm text-slate-500">If hidden, the product won't appear on the public website.</p>
+      {/* Visibility & Toggles */}
+      <div className="border-t border-slate-200 dark:border-slate-800 pt-6 space-y-4">
+        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+          <div>
+            <h4 className="text-sm font-medium text-slate-900 dark:text-white">Public Visibility</h4>
+            <p className="text-xs text-slate-500">If hidden, the product won't appear on the public website.</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} className="sr-only peer" />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 dark:peer-focus:ring-brand-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-brand-600"></div>
+          </label>
         </div>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} className="sr-only peer" />
-          <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 dark:peer-focus:ring-brand-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-brand-600"></div>
-        </label>
+
+        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+          <div>
+            <h4 className="text-sm font-medium text-slate-900 dark:text-white">Featured Product</h4>
+            <p className="text-xs text-slate-500">Show this product on the homepage featured section.</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="sr-only peer" />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 dark:peer-focus:ring-brand-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-brand-600"></div>
+          </label>
+        </div>
+
+        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+          <div>
+            <h4 className="text-sm font-medium text-slate-900 dark:text-white">New Arrival Badge</h4>
+            <p className="text-xs text-slate-500">Display a "New" badge on the product card.</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked={newArrival} onChange={(e) => setNewArrival(e.target.checked)} className="sr-only peer" />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-300 dark:peer-focus:ring-brand-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-brand-600"></div>
+          </label>
+        </div>
       </div>
 
       {/* Submit Button */}
