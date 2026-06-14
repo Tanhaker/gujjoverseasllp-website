@@ -12,7 +12,7 @@ export default async function PublicLayout({
   const supabase = await createClient();
   const { data: bannerSetting } = await supabase.from('site_settings').select('value').eq('key', 'banner').single();
   const banner = bannerSetting?.value;
-  const { phone } = await getContactDetails();
+  const { phone, whatsapp } = await getContactDetails();
 
   const { data: maintenanceSetting } = await supabase.from('site_settings').select('value').eq('key', 'maintenance_mode').single();
   const maintenance_mode = maintenanceSetting?.value === 'true';
@@ -37,7 +37,7 @@ export default async function PublicLayout({
           {banner}
         </div>
       )}
-      <Navbar phone={phone} />
+      <Navbar phone={phone} whatsapp={whatsapp} />
       {children}
       <Footer />
     </div>

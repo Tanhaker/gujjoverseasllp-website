@@ -10,7 +10,9 @@ export async function getContactDetails() {
   }, {}) || {};
   
   return {
-    phone: settings['phone'] || '9327883001',
-    email: settings['email'] || 'gujjoverseasllp@gmail.com',
+    phone: settings['contact_phone'] || '+91 9714888806',
+    email: settings['contact_email'] || 'gujjoverseasllp@gmail.com',
+    whatsapp: settings['whatsapp_number'] || '+91 9714888806',
+    address: settings['company_address'] || 'Ahmedabad, Gujarat, India',
   }
 }
