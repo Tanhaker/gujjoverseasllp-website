@@ -44,7 +44,7 @@ export async function login(formData: FormData) {
     
     if (mfaData?.currentLevel === 'aal1') {
       const { data: factorsData } = await supabase.auth.mfa.listFactors()
-      const totpFactor = factorsData?.factors?.find(f => f.factor_type === 'totp' && f.status === 'verified')
+      const totpFactor = factorsData?.totp?.find(f => f.status === 'verified')
 
       if (!totpFactor) {
         return { mfaRequired: true, enroll: true }
