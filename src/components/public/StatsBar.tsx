@@ -17,13 +17,13 @@ export default function StatsBar({ products, countries, categories, responseTime
   ];
 
   return (
-    <div className="bg-[#0a2e1a]/95 border-t border-white/10 relative z-10 w-full overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 divide-x-0 md:divide-x divide-white/10">
+    <div className="bg-[#0a2e1a]/95 border-y border-white/10 relative z-10 w-full overflow-hidden shadow-xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="flex flex-wrap justify-center gap-y-10 gap-x-4 sm:gap-x-12 md:divide-x md:divide-white/10">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center justify-center text-center px-4">
-              <span className="text-3xl font-bold text-[#2ecc71] mb-1">{stat.value}</span>
-              <span className="text-xs uppercase tracking-wider text-white/60 font-medium">{stat.label}</span>
+            <div key={index} className="flex flex-col items-center justify-center text-center px-4 w-[45%] md:w-auto md:flex-1">
+              <span className="text-4xl sm:text-5xl font-black text-[#2ecc71] mb-2 drop-shadow-md">{stat.value}</span>
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-white/70 font-semibold text-center">{stat.label}</span>
             </div>
           ))}
         </div>
