@@ -80,8 +80,12 @@ export default async function Home() {
               displayProducts.map((product) => (
                 <div key={product.id} className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/50 dark:border-slate-800/50 group relative flex flex-col hover:-translate-y-2">
                   {product.is_new_arrival && (
-                    <div className="absolute top-4 left-4 z-20 bg-brand-500 text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full font-bold shadow-lg shadow-brand-500/30 backdrop-blur-md">
-                      New Arrival
+                    <div className="absolute top-4 left-4 z-20 overflow-hidden rounded-full p-[1px] group/badge">
+                      <div className="absolute inset-0 bg-gradient-to-r from-brand-400 via-blue-500 to-emerald-400 opacity-70 animate-pulse-slow blur-[2px]" />
+                      <div className="relative bg-white/20 backdrop-blur-xl border border-white/40 text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full font-bold shadow-lg flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+                        New Arrival
+                      </div>
                     </div>
                   )}
                   <div className="h-64 bg-slate-100 dark:bg-slate-800 relative overflow-hidden shrink-0">

@@ -25,10 +25,18 @@ export default function Navbar({ phone = "+91 9714888806", whatsapp = "+91 97148
   const whatsappUrl = `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Hi,%20I'm%20interested%20in%20your%20products.`;
 
   return (
-    <nav className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-      scrolled ? "bg-[#0a2e1a]/95 backdrop-blur-md shadow-lg" : "bg-[#0a2e1a]"
-    } border-b border-white/10`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`sticky top-0 z-50 w-full transition-all duration-500 overflow-hidden ${
+      scrolled 
+        ? "bg-[#0a2e1a]/40 backdrop-blur-2xl shadow-2xl border-b border-white/10" 
+        : "bg-[#0a2e1a] border-b border-white/5"
+    }`}>
+      {scrolled && (
+        <>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-600/20 via-blue-900/20 to-brand-900/20 opacity-50 blur-xl animate-pulse-slow pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+        </>
+      )}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20">
           
           {/* Left: Logo & Subtext */}

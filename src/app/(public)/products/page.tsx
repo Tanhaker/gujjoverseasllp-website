@@ -120,8 +120,12 @@ export default async function ProductsPage({
                 className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100/80 dark:border-slate-800 group flex flex-col h-full hover:-translate-y-2 relative"
               >
                 {product.is_new_arrival && (
-                  <div className="absolute top-4 left-4 z-20 bg-brand-500 text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full font-bold shadow-lg shadow-brand-500/30 backdrop-blur-md">
-                    New Arrival
+                  <div className="absolute top-4 left-4 z-20 overflow-hidden rounded-full p-[1px] group/badge">
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-400 via-blue-500 to-emerald-400 opacity-70 animate-pulse-slow blur-[2px]" />
+                    <div className="relative bg-white/20 backdrop-blur-xl border border-white/40 text-white text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-full font-bold shadow-lg flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+                      New Arrival
+                    </div>
                   </div>
                 )}
                 <div className="h-72 bg-slate-100 dark:bg-slate-800 relative overflow-hidden shrink-0">
