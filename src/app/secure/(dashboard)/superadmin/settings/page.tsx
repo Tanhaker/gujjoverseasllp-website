@@ -174,6 +174,41 @@ export default async function SettingsPage() {
           </button>
         </div>
       </form>
+
+      {/* Database Backup Section (Liquid Glass Theme) */}
+      <div className="mt-12 mb-8">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 font-serif">System Management</h2>
+        
+        {/* Liquid Glass Container */}
+        <div className="relative rounded-[2rem] p-[1px] overflow-hidden group">
+          {/* Animated blurred gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-400 via-blue-500 to-emerald-400 opacity-30 group-hover:opacity-70 transition-opacity duration-1000 blur-xl animate-pulse-slow" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-brand-600 to-transparent opacity-40 blur-2xl group-hover:rotate-180 transition-transform duration-[3s] ease-in-out" />
+          
+          {/* Glass content layer */}
+          <div className="relative bg-white/40 dark:bg-slate-950/40 backdrop-blur-2xl rounded-[2rem] p-8 md:p-10 border border-white/40 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden shadow-2xl">
+            {/* Glossy highlight line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+            
+            <div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">Database Backup</h3>
+              <p className="text-slate-700 dark:text-slate-300 font-medium">Download a complete JSON export of all core tables (Products, Categories, Users, etc.).</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Recommended before making major system changes.</p>
+            </div>
+            
+            <a 
+              href="/api/backup/export" 
+              download
+              className="shrink-0 relative overflow-hidden inline-flex items-center px-8 py-4 text-base font-bold rounded-2xl text-white bg-slate-900 dark:bg-white dark:text-slate-900 transition-transform hover:scale-105 shadow-xl hover:shadow-2xl group/btn"
+            >
+              {/* Button inner gleam */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+              Download Full Backup
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }
