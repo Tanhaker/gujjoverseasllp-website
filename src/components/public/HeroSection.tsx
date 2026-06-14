@@ -46,7 +46,16 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
   };
 
   return (
-    <div className="relative w-full min-h-[460px] bg-gradient-to-br from-[#0a2e1a] via-[#0f4a2a] to-[#1a6b3a] overflow-hidden flex items-center">
+    <div className="relative w-full min-h-[500px] bg-gradient-to-br from-[#0a2e1a] via-[#0f4a2a] to-[#1a6b3a] overflow-hidden flex items-center">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 opacity-20 mix-blend-luminosity" 
+        style={{ 
+          backgroundImage: "url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2940&auto=format&fit=crop')", 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center' 
+        }} 
+      ></div>
       {/* Subtle overlay pattern */}
       <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
       
