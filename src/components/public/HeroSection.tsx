@@ -59,25 +59,6 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
       {/* Subtle overlay pattern */}
       <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
       
-      {/* Liquid Glass Trust Badges (Floating) */}
-      <div className="hidden lg:flex absolute top-1/4 left-[40%] bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-0 hover:scale-105 transition-transform group">
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-400/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="bg-[#2ecc71]/20 p-2 rounded-xl text-[#2ecc71] relative z-10"><Leaf className="w-5 h-5" /></div>
-        <div className="relative z-10">
-          <p className="text-white text-sm font-bold">100% Quality</p>
-          <p className="text-white/60 text-xs">Assured Exports</p>
-        </div>
-      </div>
-      
-      <div className="hidden lg:flex absolute bottom-1/4 left-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-0 hover:scale-105 transition-transform group" style={{ animationDelay: '0.2s' }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-brand-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="bg-blue-500/20 p-2 rounded-xl text-blue-400 relative z-10"><Diamond className="w-5 h-5" /></div>
-        <div className="relative z-10">
-          <p className="text-white text-sm font-bold">20+ Countries</p>
-          <p className="text-white/60 text-xs">Global Reach</p>
-        </div>
-      </div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
@@ -130,7 +111,26 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
           </div>
           
           {/* Right Column (45%) */}
-          <div className="lg:col-span-5 w-full">
+          <div className="lg:col-span-5 w-full relative">
+            
+            {/* Liquid Glass Trust Badges (Floating around the category grid) */}
+            <div className="hidden lg:flex absolute -top-8 -right-4 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-20 hover:scale-105 transition-transform group">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-400/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="bg-[#2ecc71]/20 p-2 rounded-xl text-[#2ecc71] relative z-10"><Leaf className="w-5 h-5" /></div>
+              <div className="relative z-10">
+                <p className="text-white text-sm font-bold">100% Quality</p>
+                <p className="text-white/60 text-xs">Assured Exports</p>
+              </div>
+            </div>
+            
+            <div className="hidden lg:flex absolute -bottom-6 -left-8 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-20 hover:scale-105 transition-transform group" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-brand-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="bg-blue-500/20 p-2 rounded-xl text-blue-400 relative z-10"><Diamond className="w-5 h-5" /></div>
+              <div className="relative z-10">
+                <p className="text-white text-sm font-bold">20+ Countries</p>
+                <p className="text-white/60 text-xs">Global Reach</p>
+              </div>
+            </div>
             <div className="mb-4">
               <span className="text-[11px] text-white/40 uppercase tracking-[0.2em] font-medium">Browse by category</span>
             </div>
