@@ -33,8 +33,8 @@ export default function LoginPage() {
         if (enrollResult.error) {
           setError(enrollResult.error)
         } else {
-          setQrCode(enrollResult.qrCode)
-          setFactorId(enrollResult.factorId)
+          setQrCode(enrollResult.qrCode || null)
+          setFactorId(enrollResult.factorId || null)
         }
       } else {
         setMfaAction('verify')
