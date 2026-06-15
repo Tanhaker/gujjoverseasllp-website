@@ -64,8 +64,8 @@ export default function SuperAdminLoginPage() {
         
         <div className="relative z-10">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/10 mb-4 border border-purple-500/20">
-              <ShieldCheck className="h-8 w-8 text-purple-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white mb-4 border border-purple-500/20 shadow-lg shadow-purple-500/10 overflow-hidden p-1">
+              <img src="/logo.jpg" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain" />
             </div>
             <h1 className="text-3xl font-serif font-bold text-white mb-2">SuperAdmin Portal</h1>
             <p className="text-slate-400 text-sm">

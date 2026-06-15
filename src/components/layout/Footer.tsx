@@ -12,13 +12,16 @@ export default async function Footer() {
           
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="bg-brand-500 p-1.5 rounded-lg">
-                <Leaf className="h-6 w-6 text-white" />
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative h-12 w-12 rounded-full overflow-hidden bg-white flex items-center justify-center p-0.5 shadow-lg group-hover:scale-105 transition-transform">
+                <img src="/logo.jpg" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain" />
               </div>
-              <span className="font-serif font-bold text-white text-xl tracking-tight">
-                GujjOverseas<span className="text-brand-500">LLP</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide leading-none">
+                  Gujj<span className="text-[#2ecc71]">Overseas</span>
+                </span>
+                <span className="text-[10px] sm:text-[11px] text-white/70 uppercase tracking-widest leading-tight mt-1">Global Exports</span>
+              </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
               Exporting premium quality agricultural products globally. Our commitment is to deliver freshness, purity, and trust with every shipment.

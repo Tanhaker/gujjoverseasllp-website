@@ -64,8 +64,8 @@ export default function LoginPage() {
         
         <div className="relative z-10">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-500/10 mb-4 border border-brand-500/20">
-              <Leaf className="h-8 w-8 text-brand-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white mb-4 border border-brand-500/20 shadow-lg shadow-brand-500/10 overflow-hidden p-1">
+              <img src="/logo.jpg" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain" />
             </div>
             <h1 className="text-3xl font-serif font-bold text-white mb-2">Admin Portal</h1>
             <p className="text-slate-400 text-sm">
