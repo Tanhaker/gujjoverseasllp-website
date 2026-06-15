@@ -13,8 +13,8 @@ export default async function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative h-16 w-16 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <img src="/logo.jpg" alt="GujjOverseas LLP Logo" className="h-full w-full object-cover scale-110" />
+              <div className="relative h-16 w-16 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform p-1.5">
+                <img src="/logo.png" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain" />
               </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
