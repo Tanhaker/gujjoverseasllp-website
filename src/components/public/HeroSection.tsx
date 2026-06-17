@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Leaf, Scissors, Palette, Diamond, Flame, Sofa, ArrowUpRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface Category {
   id: string;
@@ -18,20 +21,21 @@ interface HeroProps {
 }
 
 export default function HeroSection({ badgeText, tagline, subtext, categories }: HeroProps) {
-  // Helper to safely render the word "Quality" in green if it exists in the tagline
+  const { scrollY } = useScroll();
+  const yParallax = useTransform(scrollY, [0, 1000], [0, 300]);
+
   const renderTagline = () => {
     const parts = tagline.split(/Quality/i);
     if (parts.length > 1) {
       return (
         <>
-          {parts[0]}<span className="text-[#2ecc71]">Quality</span>{parts[1]}
+          {parts[0]}<span className="text-brand-500">Quality</span>{parts[1]}
         </>
       );
     }
     return tagline;
   };
 
-  // Map string icon names to Lucide components
   const renderIcon = (iconName: string, color: string) => {
     const props = { className: "w-6 h-6", style: { color } };
     switch (iconName) {
@@ -46,18 +50,24 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
   };
 
   return (
-    <div className="relative w-full min-h-[500px] bg-gradient-to-br from-[#0a2e1a] via-[#0f4a2a] to-[#1a6b3a] overflow-hidden flex items-center">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 opacity-20 mix-blend-luminosity" 
-        style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2940&auto=format&fit=crop')", 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center' 
-        }} 
-      ></div>
-      {/* Subtle overlay pattern */}
-      <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+    <div id="hero" className="relative w-full min-h-[500px] bg-bg-primary overflow-hidden flex items-center pt-20">
+      
+      {/* Background Rings */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-[0.07]">
+        <div className="absolute w-[800px] h-[800px] rounded-full border-[2px] border-brand-500" />
+        <div className="absolute w-[1200px] h-[1200px] rounded-full border-[2px] border-brand-500" />
+        <div className="absolute w-[1600px] h-[1600px] rounded-full border-[2px] border-brand-500" />
+      </div>
+
+      {/* Parallax Watermark Text */}
+      <motion.div 
+        style={{ y: yParallax }}
+        className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden select-none"
+      >
+        <span className="text-[20vw] font-serif font-black text-brand-500 opacity-[0.03] tracking-tighter whitespace-nowrap">
+          EXPORTS
+        </span>
+      </motion.div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -67,106 +77,100 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
             
             {/* Badge */}
             {badgeText && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#2ecc71]/40 bg-[#2ecc71]/10 backdrop-blur-sm mb-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-500/40 bg-surface shadow-sm mb-6"
+              >
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2ecc71] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2ecc71]"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
                 </span>
-                <span className="text-xs font-medium text-[#2ecc71] uppercase tracking-wide">{badgeText}</span>
-              </div>
+                <span className="text-xs font-medium text-brand-500 uppercase tracking-wide">{badgeText}</span>
+              </motion.div>
             )}
             
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-serif font-bold text-white leading-[1.15] mb-6">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-[54px] font-serif font-bold text-text-primary leading-[1.15] mb-6"
+            >
               {renderTagline()}
-            </h1>
+            </motion.h1>
             
             {/* Subtext */}
             {subtext && (
-              <p className="text-base sm:text-lg text-white/65 max-w-[480px] mb-8 leading-relaxed font-light">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-base sm:text-lg text-slate-600 max-w-[480px] mb-8 leading-relaxed font-sans"
+              >
                 {subtext}
-              </p>
+              </motion.p>
             )}
             
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full sm:w-auto">
-              <Link href="/products" className="inline-flex justify-center items-center gap-2 bg-[#2ecc71] hover:bg-[#27ae60] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_4px_20px_rgba(46,204,113,0.3)] hover:shadow-[0_4px_25px_rgba(46,204,113,0.4)] hover:-translate-y-0.5">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            >
+              <Link href="/products" className="inline-flex justify-center items-center gap-2 bg-text-primary hover:bg-slate-800 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-md hover:-translate-y-0.5">
                 Explore All Products
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/contact" className="inline-flex justify-center items-center gap-2 bg-transparent border border-white/20 hover:bg-white/5 text-white px-8 py-3.5 rounded-full font-medium transition-all hover:border-white/40">
+              <Link href="/contact" className="inline-flex justify-center items-center gap-2 bg-surface border border-border-subtle hover:border-brand-500 text-text-primary px-8 py-3.5 rounded-full font-medium transition-all shadow-sm">
                 Send an Inquiry
               </Link>
-            </div>
-            
-            {/* Certifications Row */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-6 border-t border-white/10 w-full sm:w-auto">
-              {['FSSAI Certified', 'APEDA Registered', 'ISO 9001', 'GST Verified'].map((cert) => (
-                <div key={cert} className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/30"></div>
-                  <span className="text-[11px] font-medium text-white/50 tracking-wider uppercase">{cert}</span>
-                </div>
-              ))}
-            </div>
+            </motion.div>
           </div>
           
           {/* Right Column (45%) */}
-          <div className="lg:col-span-5 w-full relative">
-            
-            {/* Liquid Glass Trust Badges (Floating around the category grid) */}
-            <div className="hidden lg:flex absolute -top-8 -right-4 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-20 hover:scale-105 transition-transform group">
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-400/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="bg-[#2ecc71]/20 p-2 rounded-xl text-[#2ecc71] relative z-10"><Leaf className="w-5 h-5" /></div>
-              <div className="relative z-10">
-                <p className="text-white text-sm font-bold">100% Quality</p>
-                <p className="text-white/60 text-xs">Assured Exports</p>
-              </div>
-            </div>
-            
-            <div className="hidden lg:flex absolute -bottom-6 -left-8 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-2xl items-center gap-3 shadow-2xl animate-fade-in-up z-20 hover:scale-105 transition-transform group" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-brand-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="bg-blue-500/20 p-2 rounded-xl text-blue-400 relative z-10"><Diamond className="w-5 h-5" /></div>
-              <div className="relative z-10">
-                <p className="text-white text-sm font-bold">20+ Countries</p>
-                <p className="text-white/60 text-xs">Global Reach</p>
-              </div>
-            </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-5 w-full relative"
+          >
             <div className="mb-4">
-              <span className="text-[11px] text-white/40 uppercase tracking-[0.2em] font-medium">Browse by category</span>
+              <span className="text-[11px] text-brand-500 uppercase tracking-[0.2em] font-medium">Browse by category</span>
             </div>
             
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {categories.slice(0, 6).map((cat) => (
-                <Link 
-                  href={`/categories/${cat.slug}`} 
+              {categories.slice(0, 6).map((cat, index) => (
+                <motion.div
                   key={cat.id}
-                  className="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 sm:p-5 transition-all duration-300 overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                 >
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-4 h-4 text-white/50" />
-                  </div>
-                  
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 shadow-inner"
-                    style={{ backgroundColor: `${cat.color}20` }} // 20% opacity background
+                  <Link 
+                    href={`/categories/${cat.slug}`} 
+                    className="group relative bg-surface border border-border-subtle hover:border-brand-500 rounded-xl p-4 sm:p-5 transition-all duration-300 overflow-hidden block shadow-sm hover:shadow-md hover:-translate-y-1"
                   >
-                    {renderIcon(cat.icon, cat.color)}
-                  </div>
-                  
-                  <h3 className="text-white font-medium text-sm sm:text-[15px] mb-1 group-hover:text-[#2ecc71] transition-colors">{cat.name}</h3>
-                  <p className="text-[11px] text-white/45 line-clamp-1">{cat.description || "Explore collection"}</p>
-                </Link>
-              ))}
-              
-              {/* Coming Soon placeholder if less than 6 categories */}
-              {categories.length < 6 && Array.from({ length: 6 - categories.length }).map((_, i) => (
-                <div key={`empty-${i}`} className="border border-dashed border-white/10 rounded-xl p-5 flex flex-col items-center justify-center opacity-50">
-                  <div className="w-8 h-8 rounded bg-white/5 mb-2"></div>
-                  <span className="text-[10px] text-white/30 uppercase tracking-wider">More Coming Soon</span>
-                </div>
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-4 h-4 text-brand-500" />
+                    </div>
+                    
+                    <div 
+                      className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 shadow-sm"
+                      style={{ backgroundColor: `${cat.color}15` }}
+                    >
+                      {renderIcon(cat.icon, cat.color)}
+                    </div>
+                    
+                    <h3 className="text-text-primary font-medium text-sm sm:text-[15px] mb-1 font-serif">{cat.name}</h3>
+                    <p className="text-[11px] text-slate-500 line-clamp-1">{cat.description || "Explore collection"}</p>
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
           
         </div>
       </div>

@@ -1,17 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #ebf9f1;
-  --color-brand-100: #d0f1de;
-  --color-brand-200: #a4e3c1;
-  --color-brand-300: #6cd19f;
-  --color-brand-400: #3ab87e;
-  --color-brand-500: #2ecc71; /* Primary accent */
-  --color-brand-600: #1e9d5a;
-  --color-brand-700: #187d49;
-  --color-brand-800: #1a6b3a; /* Hero gradient stop */
-  --color-brand-900: #0f4a2a; /* Hero gradient stop */
-  --color-brand-950: #0a2e1a; /* Darkest hero bg */
+  --color-brand-50: #fdfaf3;
+  --color-brand-100: #faebd2;
+  --color-brand-200: #f5d5a6;
+  --color-brand-300: #efb971;
+  --color-brand-400: #e89940;
+  --color-brand-500: #c9a84c; /* Gold - Primary accent */
+  --color-brand-600: #c9711c;
+  --color-brand-700: #a75519;
+  --color-brand-800: #85441a;
+  --color-brand-900: #6a3818;
+  --color-brand-950: #391a0a;
+
+  --color-bg-primary: #FAFAF7;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #111111;
+  --color-border-subtle: #EEEBE4;
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -23,14 +28,14 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #FAFAF7; /* Light & Gold Primary Background */
+  --foreground: #111111; /* Light & Gold Primary Text */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020617;
-    --foreground: #f8fafc;
+    --background: #111111; /* Deep dark background */
+    --foreground: #FAFAF7; /* Warm off-white text */
   }
 }
 
