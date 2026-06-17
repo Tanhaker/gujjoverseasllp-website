@@ -55,7 +55,7 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
       {/* Background Rings and Image Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Premium Image Background */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center opacity-[0.04] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center opacity-[0.12] mix-blend-multiply" />
         
         {/* Decorative Rings */}
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
@@ -70,8 +70,8 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
         style={{ y: yParallax }}
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden select-none"
       >
-        <span className="text-[20vw] font-serif font-black text-brand-500 opacity-[0.03] tracking-tighter whitespace-nowrap">
-          EXPORTS
+        <span className="text-[14vw] font-serif font-black text-brand-500 opacity-[0.04] tracking-tighter whitespace-nowrap">
+          GUJJOVERSEAS
         </span>
       </motion.div>
       
