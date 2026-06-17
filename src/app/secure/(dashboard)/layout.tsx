@@ -20,9 +20,9 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-bg-primary flex flex-col md:flex-row font-sans">
       {isAuth && (
-        <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800 text-slate-300 flex flex-col shrink-0">
+        <aside className="w-full md:w-64 bg-[#111111] border-r border-slate-800 text-slate-300 flex flex-col shrink-0">
           <div className="p-6 border-b border-slate-800">
             <Link href={isSuperAdmin ? "/secure/superadmin/dashboard" : "/secure/admin/dashboard"} className="flex items-center gap-2 mb-2">
               <ShieldCheck className={`h-6 w-6 ${isSuperAdmin ? 'text-purple-500' : 'text-brand-500'}`} />
@@ -89,7 +89,7 @@ export default async function AdminLayout({
         </aside>
       )}
 
-      <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950">
+      <main className="flex-1 overflow-y-auto bg-bg-primary text-text-primary p-6">
         {children}
       </main>
     </div>
