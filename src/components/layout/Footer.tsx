@@ -12,13 +12,9 @@ export default async function Footer() {
           
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative h-14 w-14 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform bg-white/5 rounded-full p-2 border border-white/10">
+            <Link href="/" className="flex items-center group">
+              <div className="relative h-20 w-20 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform bg-white/5 rounded-[2rem] p-2 border border-white/10">
                 <img src="/logo.png" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain filter drop-shadow-md brightness-110" />
-              </div>
-              <div className="flex flex-col border-l-2 border-brand-500/30 pl-3">
-                <span className="font-serif font-bold text-[18px] sm:text-xl text-white tracking-wide leading-none mb-1">GUJJ OVERSEAS</span>
-                <span className="text-[10px] tracking-[0.25em] text-brand-500 uppercase font-medium leading-none">LLP</span>
               </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed font-sans">
