@@ -35,9 +35,13 @@ export default function Navbar({ phone = "+91 9714888806", whatsapp = "+91 97148
           
           {/* Left: Logo */}
           <div className="flex flex-col justify-center">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative h-14 w-14 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform p-1 border border-border-subtle">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative h-12 w-12 sm:h-14 sm:w-14 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform">
                 <img src="/logo.png" alt="GujjOverseas LLP Logo" className="h-full w-full object-contain" />
+              </div>
+              <div className="flex flex-col border-l-2 border-brand-500/30 pl-3">
+                <span className="font-serif font-bold text-[18px] sm:text-xl text-text-primary tracking-wide leading-none mb-1">GUJJ OVERSEAS</span>
+                <span className="text-[10px] sm:text-[11px] tracking-[0.25em] text-brand-500 uppercase font-medium leading-none">LLP</span>
               </div>
             </Link>
           </div>
