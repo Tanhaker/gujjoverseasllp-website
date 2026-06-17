@@ -52,11 +52,17 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
   return (
     <div id="hero" className="relative w-full min-h-[500px] bg-bg-primary overflow-hidden flex items-center pt-20">
       
-      {/* Background Rings */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-[0.07]">
-        <div className="absolute w-[800px] h-[800px] rounded-full border-[2px] border-brand-500" />
-        <div className="absolute w-[1200px] h-[1200px] rounded-full border-[2px] border-brand-500" />
-        <div className="absolute w-[1600px] h-[1600px] rounded-full border-[2px] border-brand-500" />
+      {/* Background Rings and Image Overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Premium Image Background */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center opacity-[0.04] mix-blend-multiply" />
+        
+        {/* Decorative Rings */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
+          <div className="absolute w-[800px] h-[800px] rounded-full border-[2px] border-brand-500" />
+          <div className="absolute w-[1200px] h-[1200px] rounded-full border-[2px] border-brand-500" />
+          <div className="absolute w-[1600px] h-[1600px] rounded-full border-[2px] border-brand-500" />
+        </div>
       </div>
 
       {/* Parallax Watermark Text */}
