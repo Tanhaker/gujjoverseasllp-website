@@ -16,14 +16,15 @@ const renderIcon = (iconName: string, color: string) => {
   }
 };
 
-export default async function CategoryDetailPage({ params }: { params: { slug: string } }) {
+export default async function CategoryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const supabase = await createClient();
+  const { slug } = await params;
 
   // 1. Fetch category details
   const { data: category } = await supabase
     .from('categories')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('is_visible', true)
     .single();
 
