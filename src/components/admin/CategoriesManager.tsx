@@ -43,81 +43,90 @@ export default function CategoriesManager() {
  fetchCategories();
  }, []);
 
- const fetchCategories = async () => {
- setLoading(true);
- const { data: cats } = await supabase
- .from('categories')
- .select('*, products(count)')
- .order('display_order', { ascending: true });
- 
- if (cats) {
- setCategories(cats.map((c: any) => ({
- ...c,
- product_count: c.products?.[0]?.count || 0
- })));
- }
- setLoading(false);
- };
+  const fetchCategories = async () => {
+    setLoading(true);
+    const { data: cats, error } = await supabase
+      .from('categories')
+      .select('*, products(count)')
+      .order('display_order', { ascending: true });
+    
+    if (error) {
+      console.error("Fetch categories error:", error);
+      alert("Error fetching categories: " + error.message + ". Did you run the SQL migration?");
+    }
+    
+    if (cats) {
+      setCategories(cats.map((c: any) => ({
+        ...c,
+        product_count: c.products?.[0]?.count || 0
+      })));
+    }
+    setLoading(false);
+  };
 
- const handleSave = async () => {
- if (!formData.name) return alert("Name is required");
+  const handleSave = async () => {
+    if (!formData.name) return alert("Name is required");
 
- // Auto-generate slug if new
- const slug = formData.slug || formData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
- 
- const payload = {
- name: formData.name,
- slug,
- description: formData.description || '',
- icon: formData.icon || 'plant-2',
- color: formData.color || '#2ecc71',
- is_visible: formData.is_visible !== false,
- display_order: formData.display_order || categories.length + 1
- };
+    // Auto-generate slug if new
+    const slug = formData.slug || formData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    
+    const payload = {
+      name: formData.name,
+      slug,
+      description: formData.description || '',
+      icon: formData.icon || 'plant-2',
+      color: formData.color || '#2ecc71',
+      is_visible: formData.is_visible !== false,
+      display_order: formData.display_order || categories.length + 1
+    };
 
- if (editingId) {
- await supabase.from('categories').update(payload).eq('id', editingId);
- } else {
- await supabase.from('categories').insert([payload]);
- }
+    if (editingId) {
+      const { error } = await supabase.from('categories').update(payload).eq('id', editingId);
+      if (error) { alert("Error updating: " + error.message); return; }
+    } else {
+      const { error } = await supabase.from('categories').insert([payload]);
+      if (error) { alert("Error adding: " + error.message); return; }
+    }
 
- setEditingId(null);
- setIsAdding(false);
- fetchCategories();
- };
+    setEditingId(null);
+    setIsAdding(false);
+    fetchCategories();
+  };
 
- const handleDelete = async (id: string, count: number) => {
- if (count > 0) {
- alert(`Cannot delete category with ${count} active products. Reassign or delete the products first.`);
- return;
- }
- if (confirm("Are you sure you want to delete this category?")) {
- await supabase.from('categories').delete().eq('id', id);
- fetchCategories();
- }
- };
+  const handleDelete = async (id: string, count: number) => {
+    if (count > 0) {
+      alert(`Cannot delete category with ${count} active products. Reassign or delete the products first.`);
+      return;
+    }
+    if (confirm("Are you sure you want to delete this category?")) {
+      const { error } = await supabase.from('categories').delete().eq('id', id);
+      if (error) { alert("Error deleting: " + error.message); return; }
+      fetchCategories();
+    }
+  };
 
- const startEdit = (cat: Category) => {
- setFormData(cat);
- setEditingId(cat.id);
- setIsAdding(false);
- };
+  const startEdit = (cat: Category) => {
+    setFormData(cat);
+    setEditingId(cat.id);
+    setIsAdding(false);
+  };
 
- const startAdd = () => {
- setFormData({
- icon: 'plant-2',
- color: '#2ecc71',
- is_visible: true,
- display_order: categories.length + 1
- });
- setIsAdding(true);
- setEditingId(null);
- };
+  const startAdd = () => {
+    setFormData({
+      icon: 'plant-2',
+      color: '#2ecc71',
+      is_visible: true,
+      display_order: categories.length + 1
+    });
+    setIsAdding(true);
+    setEditingId(null);
+  };
 
- const toggleVisibility = async (id: string, current: boolean) => {
- await supabase.from('categories').update({ is_visible: !current }).eq('id', id);
- fetchCategories();
- };
+  const toggleVisibility = async (id: string, current: boolean) => {
+    const { error } = await supabase.from('categories').update({ is_visible: !current }).eq('id', id);
+    if (error) { alert("Error updating visibility: " + error.message); return; }
+    fetchCategories();
+  };
 
  if (loading) return <div className="text-slate-500">Loading categories...</div>;
 
