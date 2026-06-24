@@ -102,7 +102,7 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
  initial={{ opacity: 0, y: 20 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 0.6, delay: 0.1 }}
- className="text-4xl sm:text-5xl lg:text-[54px] font-serif font-bold text-text-primary leading-[1.15] mb-6"
+ className="text-3xl sm:text-4xl lg:text-[54px] font-serif font-bold text-text-primary leading-[1.15] mb-6"
  >
  {renderTagline()}
  </motion.h1>
@@ -126,13 +126,13 @@ export default function HeroSection({ badgeText, tagline, subtext, categories }:
  transition={{ duration: 0.6, delay: 0.3 }}
  className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
  >
- <Link href="/products" className="inline-flex justify-center items-center gap-2 bg-text-primary hover:bg-slate-800 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-md hover:-translate-y-0.5">
- Explore All Products
- <ArrowRight className="w-4 h-4" />
- </Link>
- <Link href="/contact" className="inline-flex justify-center items-center gap-2 bg-surface border border-border-subtle hover:border-brand-500 text-text-primary px-8 py-3.5 rounded-full font-medium transition-all shadow-sm">
- Send an Inquiry
- </Link>
+          <Link href="/products" className="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-text-primary hover:bg-slate-800 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-md hover:-translate-y-0.5">
+            Explore All Products
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link href="/contact" className="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-surface border border-border-subtle hover:border-brand-500 text-text-primary px-8 py-3.5 rounded-full font-medium transition-all shadow-sm">
+            Send an Inquiry
+          </Link>
  </motion.div>
  </div>
  

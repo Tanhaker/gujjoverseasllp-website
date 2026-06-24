@@ -59,7 +59,7 @@ export default async function ProductDetailPage({
           <div className="flex flex-col lg:flex-row border-b border-slate-100">
             
             {/* Left: Image Gallery */}
-            <div className="w-full lg:w-1/2 p-8 lg:p-12 lg:border-r border-slate-100 bg-slate-50/50 flex flex-col justify-center">
+            <div className="w-full lg:w-1/2 p-5 sm:p-8 lg:p-12 lg:border-r border-slate-100 bg-slate-50/50 flex flex-col justify-center">
               <div className="bg-white rounded-3xl overflow-hidden aspect-[4/3] relative shadow-lg border border-slate-200 p-2 group">
                 <div 
                   className="absolute inset-2 rounded-2xl bg-slate-100 bg-cover bg-center shadow-inner transition-transform duration-700 group-hover:scale-[1.02]" 
@@ -88,7 +88,7 @@ export default async function ProductDetailPage({
             </div>
 
             {/* Right: Essential Info & Actions */}
-            <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col">
+            <div className="w-full lg:w-1/2 p-5 sm:p-8 lg:p-12 flex flex-col">
               <div className="mb-8">
                 <Link href={`/categories/${product.category?.slug || ''}`}>
                   <span className="inline-block px-4 py-1.5 bg-brand-50 text-brand-700 rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-brand-100 hover:bg-brand-100 transition-colors cursor-pointer shadow-sm">
@@ -120,7 +120,7 @@ export default async function ProductDetailPage({
               </div>
 
               {/* Seamless CTA Section */}
-              <div className="mt-auto bg-slate-50 rounded-3xl p-8 border border-slate-100 relative overflow-hidden group">
+              <div className="mt-auto bg-slate-50 rounded-3xl p-5 sm:p-8 border border-slate-100 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-brand-500/5 rounded-full blur-3xl group-hover:bg-brand-500/10 transition-colors"></div>
                 
                 <h4 className="font-bold text-slate-900 mb-2 flex items-center gap-2 text-xl">
@@ -151,7 +151,7 @@ export default async function ProductDetailPage({
           </div>
 
           {/* Bottom Half: Details & Specs */}
-          <div className="p-8 lg:p-12">
+          <div className="p-5 sm:p-8 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
               
               {/* Main Description */}
@@ -166,11 +166,11 @@ export default async function ProductDetailPage({
               
               {/* Specifications */}
               <div className="lg:col-span-1">
-                <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 sticky top-28">
+                <div className="bg-slate-50 rounded-3xl p-5 sm:p-8 border border-slate-100 sticky top-28">
                   <h3 className="text-2xl font-bold font-serif mb-6 text-slate-900 flex items-center gap-3 border-b border-slate-200/60 pb-4">
                     <Scale className="h-6 w-6 text-brand-500" /> Technical Specs
                   </h3>
-                  <div className="overflow-hidden">
+                  <div className="overflow-x-auto overflow-y-hidden">
                     <table className="min-w-full divide-y divide-slate-200/60">
                       <tbody className="divide-y divide-slate-200/60">
                         {product.specs && Object.keys(product.specs).length > 0 ? Object.entries(product.specs).map(([key, value]) => (
