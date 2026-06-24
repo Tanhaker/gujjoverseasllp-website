@@ -120,7 +120,7 @@ export default function AboutPage() {
  <div className="w-32 h-32 bg-slate-100 rounded-[2rem] mx-auto mb-8 flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-300 shadow-inner">
  <Users className="h-12 w-12 text-slate-400" />
  </div>
- <h3 className="text-2xl font-bold text-slate-900 mb-1">Founder Name</h3>
+ <h3 className="text-2xl font-bold text-slate-900 mb-1">Imad Kinariwala</h3>
  <p className="text-brand-600 font-semibold mb-6 uppercase tracking-wider text-sm">Managing Director</p>
  <p className="text-slate-500 leading-relaxed font-light">
  "Our commitment is to deliver not just products, but trust, quality, and reliability to every corner of the globe."
