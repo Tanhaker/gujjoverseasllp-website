@@ -1,18 +1,6 @@
-'use client'
-
-import dynamic from 'next/dynamic'
-import { ArrowLeft, Loader2 } from 'lucide-react'
+import ProductForm from '@/components/admin/ProductForm'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-
-const ProductForm = dynamic(() => import('@/components/admin/ProductForm'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center p-12 bg-white rounded-2xl shadow-sm border border-slate-100">
-      <Loader2 className="h-8 w-8 text-brand-500 animate-spin" />
-      <span className="ml-3 text-slate-500">Loading form...</span>
-    </div>
-  )
-})
 
 export default function NewProductPage() {
   return (
