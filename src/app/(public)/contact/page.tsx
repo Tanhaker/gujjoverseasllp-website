@@ -3,7 +3,7 @@ import { getContactDetails } from "@/lib/settings";
 import { FadeInUp, SlideInRight } from "@/components/public/MotionWrappers";
 
 export default async function ContactPage() {
- const { phone, email } = await getContactDetails();
+  const { phone, email, address } = await getContactDetails();
  
  // Format phone number for WhatsApp URL (ensure it has country code if not present)
  // Assuming Indian number by default if it's 10 digits
@@ -118,9 +118,8 @@ export default async function ContactPage() {
  </div>
  <div>
  <h4 className="font-bold text-text-primary mb-2 text-lg font-serif">Head Office</h4>
- <p className="text-slate-600 leading-relaxed font-sans text-sm">
- 123 Export Avenue, Business District<br />
- Gujarat, India 380001
+ <p className="text-slate-600 leading-relaxed font-sans text-sm whitespace-pre-wrap">
+ {address}
  </p>
  </div>
  </div>
