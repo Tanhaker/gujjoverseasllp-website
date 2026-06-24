@@ -3,8 +3,6 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 export default function NewProductPage() {
-  throw new Error('MY_UNIQUE_TEST_ERROR_12345')
-  
   return (
     <div className="p-8 max-w-5xl mx-auto">
       <div className="mb-8">
