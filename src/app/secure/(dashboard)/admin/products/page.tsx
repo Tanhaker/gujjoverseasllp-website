@@ -1,7 +1,8 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
-import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react'
+import { Plus, Edit, Eye, EyeOff } from 'lucide-react'
 import { deleteProduct } from './actions'
+import { DeleteProductButton } from '@/components/admin/DeleteProductButton'
 
 export default async function ProductsManagementPage() {
  const supabase = await createClient()
@@ -90,18 +91,7 @@ export default async function ProductsManagementPage() {
  
  <form action={deleteProduct}>
  <input type="hidden" name="id" value={product.id} />
- <button 
- type="submit" 
- className="text-red-600 hover:text-red-900 transition-colors"
- onClick={(e) => {
- if (!confirm('Are you sure you want to delete this product?')) {
- e.preventDefault()
- }
- }}
- >
- <Trash2 className="h-4 w-4" />
- <span className="sr-only">Delete</span>
- </button>
+ <DeleteProductButton />
  </form>
  </div>
  </td>
