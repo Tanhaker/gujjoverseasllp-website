@@ -4,7 +4,6 @@ import { Tracker } from "@/components/Tracker";
 import { createClient } from '@/utils/supabase/server';
 import { getContactDetails } from "@/lib/settings";
 import ScrollProgress from "@/components/public/ScrollProgress";
-import SectionNavDots from "@/components/public/SectionNavDots";
 
 export default async function PublicLayout({
  children,
@@ -34,7 +33,6 @@ export default async function PublicLayout({
  return (
  <div className="flex flex-col min-h-screen">
  <ScrollProgress />
- <SectionNavDots />
  <Tracker />
  {banner && (
  <div className="bg-brand-600 text-white text-center py-2 px-4 text-sm font-medium w-full">
