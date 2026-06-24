@@ -3,7 +3,7 @@ import { Leaf, Mail, MapPin, Phone } from "lucide-react";
 import { getContactDetails } from "@/lib/settings";
 
 export default async function Footer() {
-  const { phone, email } = await getContactDetails();
+  const { phone, email, address } = await getContactDetails();
 
   return (
     <footer className="bg-[#111111] text-slate-300 border-t border-slate-800">
@@ -43,7 +43,7 @@ export default async function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-brand-500 shrink-0 mt-0.5" />
-                <span className="text-slate-400">123 Export Avenue, Business District, Gujarat, India 380001</span>
+                <span className="text-slate-400 whitespace-pre-wrap">{address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-brand-500 shrink-0" />

@@ -60,7 +60,7 @@ export default async function SettingsPage() {
  <textarea 
  name="company_address"
  rows={2}
- defaultValue={settings.company_address || 'Gujarat, India'}
+ defaultValue={settings.company_address || 'Surat, Gujarat, India'}
  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 outline-none resize-none" 
  />
  </div>

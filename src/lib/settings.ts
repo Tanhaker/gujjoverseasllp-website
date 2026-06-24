@@ -13,6 +13,6 @@ export async function getContactDetails() {
     phone: settings['contact_phone'] || '+91 9714888806',
     email: settings['contact_email'] || 'gujjoverseasllp@gmail.com',
     whatsapp: settings['whatsapp_number'] || '+91 9714888806',
-    address: settings['company_address'] || 'Ahmedabad, Gujarat, India',
+    address: settings['company_address'] || 'Surat, Gujarat, India',
   }
 }
