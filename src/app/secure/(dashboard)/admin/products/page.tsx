@@ -19,7 +19,7 @@ export default async function ProductsManagementPage() {
  <p className="text-slate-500 mt-2">Manage your inventory, prices, and visibility.</p>
  </div>
  <Link 
- href={`/secure/admin/products/new?t=${Date.now()}`}
+ href="/secure/admin/products/create"
  className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-xl text-white bg-brand-600 hover:bg-brand-500 transition-colors shadow-sm gap-2 whitespace-nowrap"
  >
  <Plus className="h-4 w-4" /> Add Product
