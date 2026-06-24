@@ -1,8 +1,18 @@
-import ProductForm from '@/components/admin/ProductForm'
 import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const ProductForm = dynamic(() => import('@/components/admin/ProductForm'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center p-12 bg-white rounded-2xl shadow-sm border border-slate-100">
+      <Loader2 className="h-8 w-8 text-brand-500 animate-spin" />
+      <span className="ml-3 text-slate-500">Loading form...</span>
+    </div>
+  )
+})
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
  const { id } = await params
