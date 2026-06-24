@@ -14,24 +14,29 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
  const [uploading, setUploading] = useState(false)
  const [categories, setCategories] = useState<{id: string, name: string}[]>([])
 
- // Form State
  const [name, setName] = useState(initialData?.name || '')
  const [slug, setSlug] = useState(initialData?.slug || '')
  const [categoryId, setCategoryId] = useState(initialData?.category_id || '')
  const [origin, setOrigin] = useState(initialData?.origin || '')
  const [shortDesc, setShortDesc] = useState(initialData?.short_description || '')
  const [desc, setDesc] = useState(initialData?.description || '')
- const [visible, setVisible] = useState(initialData?.is_visible ?? true)
- const [featured, setFeatured] = useState(initialData?.is_featured ?? false)
- const [newArrival, setNewArrival] = useState(initialData?.is_new_arrival ?? false)
- const [images, setImages] = useState<string[]>(initialData?.images || [])
+ const [visible, setVisible] = useState(initialData ? !!initialData.is_visible : true)
+ const [featured, setFeatured] = useState(initialData ? !!initialData.is_featured : false)
+ const [newArrival, setNewArrival] = useState(initialData ? !!initialData.is_new_arrival : false)
+ const [images, setImages] = useState<string[]>(Array.isArray(initialData?.images) ? initialData.images : [])
  
  // Specs State - convert object to array of key/value pairs
- const [specs, setSpecs] = useState<{key: string, value: string}[]>(
- initialData?.specs && Object.keys(initialData.specs).length > 0
- ? Object.entries(initialData.specs).map(([k, v]) => ({ key: k, value: v as string }))
- : [{ key: '', value: '' }]
- )
+ const [specs, setSpecs] = useState<{key: string, value: string}[]>(() => {
+   try {
+     if (initialData && initialData.specs && typeof initialData.specs === 'object') {
+       const keys = Object.keys(initialData.specs);
+       if (keys.length > 0) {
+         return keys.map(k => ({ key: k, value: String(initialData.specs[k]) }))
+       }
+     }
+   } catch (e) {}
+   return [{ key: '', value: '' }]
+ })
 
  useEffect(() => {
  // Fetch categories for the dropdown
