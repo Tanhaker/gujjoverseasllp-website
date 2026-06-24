@@ -159,7 +159,7 @@ export default async function ProductDetailPage({
         <div className="lg:col-span-2">
           <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm h-full">
             <h3 className="text-2xl font-bold font-serif mb-6 text-slate-900 border-b border-slate-100 pb-4">Product Overview</h3>
-            <div className="prose prose-slate prose-lg max-w-none text-slate-600 font-light leading-relaxed prose-headings:font-serif prose-headings:text-slate-900 prose-a:text-brand-600 hover:prose-a:text-brand-500 prose-strong:text-slate-800">
+            <div className="prose prose-slate prose-lg max-w-none text-slate-600 font-light leading-relaxed prose-headings:font-serif prose-headings:text-slate-900 prose-a:text-brand-600 hover:prose-a:text-brand-500 prose-strong:text-slate-800 prose-p:my-1 prose-headings:my-2 prose-ul:my-1 prose-li:my-0">
               <ReactMarkdown>
                 {product.description || 'No description available for this product.'}
               </ReactMarkdown>
