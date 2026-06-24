@@ -134,21 +134,21 @@ export default function CategoriesManager() {
  <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
  
  {/* Header */}
- <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50 ">
+ <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-50 ">
  <h2 className="text-xl font-bold text-slate-800 ">Product Categories</h2>
  {!isAdding && !editingId && (
  <button 
  onClick={startAdd}
- className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+ className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
  >
  <Plus className="w-4 h-4" /> Add Category
  </button>
  )}
  </div>
 
- <div className="p-6">
+ <div className="p-4 sm:p-6">
         {(isAdding || editingId) && (
-          <div className="bg-slate-50 p-6 rounded-xl border border-brand-200 mb-6 shadow-sm">
+          <div className="bg-slate-50 p-4 sm:p-6 rounded-xl border border-brand-200 mb-6 shadow-sm overflow-hidden">
             <h3 className="text-lg font-bold mb-4 text-slate-900">{isAdding ? 'Add New Category' : 'Edit Category'}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
@@ -211,16 +211,16 @@ export default function CategoriesManager() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 mt-6">
               <button 
                 onClick={() => { setIsAdding(false); setEditingId(null); }}
-                className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-100"
+                className="w-full sm:w-auto px-4 py-3 sm:py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-100 flex justify-center items-center"
               >
                 Cancel
               </button>
               <button 
                 onClick={handleSave}
-                className="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 flex items-center gap-2"
+                className="w-full sm:w-auto px-4 py-3 sm:py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 flex justify-center items-center gap-2 shadow-sm"
               >
                 <Check className="w-4 h-4" /> Save Category
               </button>
@@ -232,48 +232,50 @@ export default function CategoriesManager() {
  {categories.map((cat) => (
  <div 
  key={cat.id} 
- className={`flex items-center gap-4 p-4 rounded-xl border transition-colors ${!cat.is_visible ? 'border-dashed border-slate-300 opacity-60' : 'border-slate-200 bg-white hover:border-brand-300 '}`}
+ className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-xl border transition-colors ${!cat.is_visible ? 'border-dashed border-slate-300 opacity-60' : 'border-slate-200 bg-white hover:border-brand-300 '}`}
  >
- <div className="text-slate-400 cursor-grab hover:text-slate-600 ">
+ <div className="flex items-center gap-3 w-full sm:w-auto flex-grow min-w-0">
+ <div className="text-slate-400 cursor-grab hover:text-slate-600 shrink-0 hidden sm:block">
  <GripVertical className="w-5 h-5" />
  </div>
  
  <div 
- className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 shadow-inner"
+ className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center shrink-0 shadow-inner"
  style={{ backgroundColor: `${cat.color}20`, color: cat.color }}
  >
- {ICONS.find(i => i.name === cat.icon)?.component || <Leaf className="w-6 h-6" />}
+ {ICONS.find(i => i.name === cat.icon)?.component || <Leaf className="w-5 h-5 sm:w-6 sm:h-6" />}
  </div>
  
- <div className="flex-grow">
- <div className="flex items-center gap-2">
- <h4 className="font-bold text-slate-900 ">{cat.name}</h4>
- {!cat.is_visible && <span className="text-[10px] uppercase bg-slate-200 px-2 py-0.5 rounded font-bold text-slate-500">Hidden</span>}
+ <div className="flex-grow min-w-0">
+ <div className="flex items-center gap-2 flex-wrap">
+ <h4 className="font-bold text-slate-900 truncate">{cat.name}</h4>
+ {!cat.is_visible && <span className="text-[10px] uppercase bg-slate-200 px-2 py-0.5 rounded font-bold text-slate-500 shrink-0">Hidden</span>}
  </div>
- <div className="text-sm text-slate-500 flex items-center gap-4 mt-1">
- <span>/{cat.slug}</span>
- <span className="flex items-center gap-1"><Boxes className="w-3.5 h-3.5" /> {cat.product_count} products</span>
+ <div className="text-xs sm:text-sm text-slate-500 flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
+ <span className="truncate max-w-full">/{cat.slug}</span>
+ <span className="flex items-center gap-1 shrink-0"><Boxes className="w-3.5 h-3.5" /> {cat.product_count} products</span>
+ </div>
  </div>
  </div>
  
- <div className="flex items-center gap-2">
+ <div className="flex items-center gap-2 w-full sm:w-auto justify-end sm:justify-start pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 mt-1 sm:mt-0">
  <button 
  onClick={() => toggleVisibility(cat.id, cat.is_visible)}
- className="px-3 py-1.5 text-sm font-medium border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 "
+ className="flex-1 sm:flex-none justify-center px-3 py-1.5 text-sm font-medium border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 "
  >
  {cat.is_visible ? 'Hide' : 'Show'}
  </button>
  <button 
  onClick={() => startEdit(cat)}
- className="p-2 text-slate-500 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors"
+ className="p-2 text-slate-500 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors border border-slate-200 sm:border-transparent"
  >
- <Pencil className="w-5 h-5" />
+ <Pencil className="w-4 h-4 sm:w-5 sm:h-5" />
  </button>
  <button 
  onClick={() => handleDelete(cat.id, cat.product_count || 0)}
- className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+ className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-slate-200 sm:border-transparent"
  >
- <Trash2 className="w-5 h-5" />
+ <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
  </button>
  </div>
  </div>
