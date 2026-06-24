@@ -114,34 +114,11 @@ export default async function ProductDetailPage({
  </div>
  </div>
 
- <div className="prose prose-slate max-w-none mb-10">
- <h3 className="text-2xl font-bold font-serif mb-4 text-slate-900 ">Product Overview</h3>
- <p className="text-slate-600 leading-relaxed text-lg font-light">
- {product.description}
- </p>
- </div>
-
- <div className="mb-10">
- <h3 className="text-2xl font-bold font-serif mb-6 text-slate-900 flex items-center gap-3">
- <Scale className="h-6 w-6 text-brand-500" /> Technical Specifications
- </h3>
- <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md">
- <table className="min-w-full divide-y divide-slate-200 ">
- <tbody className="divide-y divide-slate-200 ">
- {product.specs && Object.keys(product.specs).length > 0 ? Object.entries(product.specs).map(([key, value]) => (
- <tr key={key} className="hover:bg-slate-50 transition-colors">
- <td className="py-4 px-6 text-sm font-bold text-slate-800 w-1/3 bg-slate-50/50 border-r border-slate-200 ">{key}</td>
- <td className="py-4 px-6 text-sm text-slate-600 font-medium">{value as string}</td>
- </tr>
- )) : (
- <tr>
- <td colSpan={2} className="py-8 px-6 text-sm text-center text-slate-500">Please contact us for detailed specifications.</td>
- </tr>
- )}
- </tbody>
- </table>
- </div>
- </div>
+        {product.short_description && (
+          <p className="text-slate-600 leading-relaxed text-lg mb-8">
+            {product.short_description}
+          </p>
+        )}
 
  {/* Actions */}
  <div className="mt-auto bg-gradient-to-br from-white to-slate-50 p-8 rounded-3xl border border-slate-200 shadow-lg relative overflow-hidden group">
@@ -172,9 +149,47 @@ export default async function ProductDetailPage({
  </div>
  </div>
 
- </div>
- </div>
- </div>
- </div>
- );
+        </div>
+      </div>
+
+      {/* Detailed Information Section */}
+      <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Main Description */}
+        <div className="lg:col-span-2">
+          <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm h-full">
+            <h3 className="text-2xl font-bold font-serif mb-6 text-slate-900 border-b border-slate-100 pb-4">Product Overview</h3>
+            <div className="prose prose-slate prose-lg max-w-none text-slate-600 font-light leading-relaxed whitespace-pre-wrap">
+              {product.description || 'No description available for this product.'}
+            </div>
+          </div>
+        </div>
+        
+        {/* Specifications */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm sticky top-24">
+            <h3 className="text-2xl font-bold font-serif mb-6 text-slate-900 flex items-center gap-3 border-b border-slate-100 pb-4">
+              <Scale className="h-6 w-6 text-brand-500" /> Technical Specs
+            </h3>
+            <div className="overflow-hidden">
+              <table className="min-w-full divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100">
+                  {product.specs && Object.keys(product.specs).length > 0 ? Object.entries(product.specs).map(([key, value]) => (
+                    <tr key={key} className="hover:bg-slate-50/50 transition-colors group">
+                      <td className="py-3 px-2 text-sm font-bold text-slate-800 w-1/3">{key}</td>
+                      <td className="py-3 px-2 text-sm text-slate-600 font-medium">{value as string}</td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td colSpan={2} className="py-8 px-2 text-sm text-center text-slate-500 bg-slate-50 rounded-xl">Please contact us for detailed specifications.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  );
 }
