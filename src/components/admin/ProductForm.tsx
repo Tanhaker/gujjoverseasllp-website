@@ -7,7 +7,9 @@ import { Plus, Trash2, UploadCloud, Save, Loader2, X } from 'lucide-react'
 
 export default function ProductForm({ initialData = null }: { initialData?: any }) {
  const router = useRouter()
- const supabase = createClient()
+ // Initialize supabase once safely
+ const [supabase] = useState(() => createClient())
+ const [mounted, setMounted] = useState(false)
  
  const [loading, setLoading] = useState(false)
  const [error, setError] = useState<string | null>(null)
@@ -39,15 +41,16 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
  })
 
  useEffect(() => {
- // Fetch categories for the dropdown
- supabase.from('categories').select('id, name').order('display_order').then(({ data }) => {
- if (data) {
- setCategories(data)
- if (!initialData?.category_id && data.length > 0) {
- setCategoryId(data[0].id)
- }
- }
- })
+   setMounted(true)
+   // Fetch categories for the dropdown
+   supabase.from('categories').select('id, name').order('display_order').then(({ data }) => {
+     if (data) {
+       setCategories(data)
+       if (!initialData?.category_id && data.length > 0) {
+         setCategoryId(data[0].id)
+       }
+     }
+   })
  }, [supabase, initialData])
 
  const handleSlugify = (text: string) => {
@@ -165,6 +168,15 @@ export default function ProductForm({ initialData = null }: { initialData?: any 
  router.refresh()
  }
  }
+
+  if (!mounted) {
+    return (
+      <div className="flex items-center justify-center p-12 bg-white rounded-2xl shadow-sm border border-slate-100">
+        <Loader2 className="h-8 w-8 text-brand-500 animate-spin" />
+        <span className="ml-3 text-slate-500">Loading form...</span>
+      </div>
+    )
+  }
 
  return (
  <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-2xl shadow-sm border border-slate-100 ">
